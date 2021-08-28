@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Desmond's Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+        <link rel="icon" href="images/logo.PNG" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<h1><strong>Airbnb Investment Analysis</strong><br />
+					</h1>
+				</div>
+			</header>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- One -->
+					<section id="one">
+						<h2>The purpose of the project is done for the sole purpose of looking for the best area within New York City to invest in.<br /></h2>
+                        <img src="images/thumbs/newyork.jpg" class="image fit thumb"></a>
+						<h3>Introduction</h3>
+						<p>Ai‌r‌b‌n‌b‌,‌ ‌Inc. is an online marketplace for arranging or offering lodging, primarily homestays, or tourism experiences. The company does not own any property, it acts as a broker and receive commission from each successful booking. It allows owners of a property to put their properties out for rent for the short term. People who are interested in renting can book the room or property on the website. Airbnb provides a clean platform for users and allows filters such as lodging type, dates, location, and price. In this report, we are keen to study which areas in New York can reap better returns. Furthermore, we would like to find out does the minimum nights required option set by the hosts lower down the popularity pecking order.
+						</p>
+						<p>According to USA Today, an average room in New York is roughly 325 square feet with interior dimensions of approximately 13'x25', including a functioning bathroom. (Gee, 2019) Therefore, let’s use this as a reference throughout our investigation. A room in Manhattan would cost $541,775, while a room in Brooklyn would only cost approximately $233,350. On the lower end of the scale, a room in Queens would only likely cost $171,275 on average. (Corcoran Group, 2019)
+						</p>
+						<p><a target="_blank" href="https://www.kaggle.com/dgomonov/new-york-city-airbnb-open-data">Here is a link to the dataset we will be using for this project</a></p>
+						<h3>Data Exploration</h3>
+						<h4>Variable Description</h4>
+						<p>The listings.csv data set is a summary regarding the listings in New York City. It contains information of Airbnb users who stayed in New York City. There is a total of 16 variables in this data set.
+						</p>
+                        <img src="images/airbnb/airbnb1.png" ></a>
+                        <img src="images/airbnb/2.png" ></a>
+						<h4>Mean and Frequency Distribution</h4>
+						<p>We have to look at the means for price and number of reviews from each listing in the New York area to determine where we can set our price range at. The goal is to find popular areas with high rental yield for the cost. 
+						</p> 
+						<p> Below, we can see from this data exploration of the neighborhood group variable that most of the listings are located in Brooklyn, Manhattan and Queens. This gives us an idea of what are the most popular spots in New York City. 
+						</p>                       
+                        <img src="images/airbnb/11.png" ></a>
+						<p> Moving on, we took a look at the average price Airbnb hosts are charging in New York City to have a good idea on what the returns for us as an investor will likely be. As we can see from the data there are some outliers present due to the large range between the median and the maximum and also the large standard deviation. However, we have a good idea from the histogram that the prices in New York ranges from $0-$800 per night with an average of $105.
+						</p>
+                        <img src="images/airbnb/3.png" ></a>
+						<h4>Finding Missing Value</h4>
+                        <img src="images/airbnb/4.png" ></a>
+						<p> We ran a python code to look for the missing values embedded in our data set. We found that 4 variables contained missing data so therefore we had to deal with them later on.
+						</p>
+						<h4> Two Research Questions derived from Data Exploration</h4>
+						<p><strong> 1) Which areas in New York have an average higher rental yield. </strong>
+						</p>
+						<p>Justification: As an investor I am interested in properties of New York. The properties we are aiming to purchase are around the mid-range price. Therefore, we would like to measure the cost of a property in relation to its expected rental yield per month. This will help us determine which room type, location and price to look at for the highest returns in New York City.
+						</p>
+						<p><strong> 2) How much does price of a listing play a part in the consumer’s decision? </strong>
+						</p>
+						<p>Justification: We want to know whether or not the consumer decision is dictated by price or quality. Most of the time in remote locations prime for relaxation like Bali or Hawaii, consumers tend to go for quality over price due to them being on a vacation. However in a city environment like New York City, consumers tend to just want a quick place to rest and recharge rather than enjoying the property. Therefore we would like to know if the consumer decision would be affected by price or quality.
+						</p>
+						<h3>Data Reporting</h3>
+						<h4> Handling missing data</h4>
+						<p>After describing the missing data we found out that some variables hold missing values which in this case were the variables ‘last_review, reviews_per_month, name and host_name).
+						</p>
+                        <img src="images/airbnb/5.png"></a>
+						<p>We decided to delete these observations as it has no use to us, as it does not meet our criteria of being a popular listing. We want to observe properties that have at least 5 reviews per listing. We set this parameter because we want to filter out the unpopular listings. As for ‘name’ we ran a code that replaced the missing values with ‘unknownname.’ This is because we did not really need to know the name of the listing, the important part is that we know the neighborhood group it is in and the price they charge per night.
+						</p>
+						<h4>Handling valid data</h4>
+						<p>After exploring the given data set and finding the missing values instilled within it we have come to a decision to set some parameters to filter out the valid data for the cleaning process. We have decided to set ‘availability_365’ to not equal 0 because we want to find properties that are actually available for customers to rent. Additionally, we set price to not equal to 0 because it is agreed within the group that a 0-pricing listing is not in our best interest and can be excluded from the analysis. As mentioned before, we also set reviews to be more than 5, this will delete the missing data found in part A and filter out all the unpopular listings. 
+						</p>
+						<h4>Creation of Secondary Variables</h4>
+						<p>We have chosen to create a secondary variable called ‘room_price’ for our dataset. We decided to add this data set to calculate the average price for a single room in different neighborhoods in New York. For this part we took each neighborhood groups’ average price per square feet and multiply it by the average room size in New York to get a good idea on what the cost would be to purchase a single room in New York. Additionally, we created another variable called ‘rental_yield’ to find the average return from purchasing a room and renting it out through Airbnb. We did this by taking the room price and dividing it by the price charged by current Airbnb owners multiplied by 30. This would give us an average rental yield for each room listing in the data set.
+						</p>
+						<h4>Grouping and Binning Variables</h4>
+						<p>For this part, we decided to group prices charged by each owner into a variable called ‘price_group.’ This would help us easily visualize the prices for each neighborhood group in the graphing phase. We had 5 groups in this variable. The first group was called ‘luxury’ and grouped observations that had prices over 1000$ per night. The second group was called ‘very high’ and had prices ranging from 700-999$. The ‘high’ group had a range of 400-699$ per night, while the ‘medium’ group had prices ranging from 100-399$ per night. Last but not least we had the ‘low’ group known as low cost listings that had prices 100$ and below.
+						</p>
+						<h4>Outlier Treatment</h4>
+                        <img src="images/airbnb/6.png"></a>
+						<p>Moving on we wanted to remove outliers that were considered extreme in order to plot out more meaningful graphs. From this part of the graph we can see that most of the rental yield is around the range of 0-2%. There are 3 evident outliers on this graph and therefore we have to remove them. We justify that these 3 outliers from our 8300 plus worth of observations were drastically affecting our data therefore we had to remove them.
+						</p>
+						<h4>Final Cleaned Dataset</h4>
+                        <img src="images/airbnb/7.png"></a>
+						<p>All in all our final data set contains 10 variables with 8320 observations.
+						</p>
+						<h3>Findings</h3>
+						<h4>Analysis of Room Prices in each Neighborhood</h4>
+						<p>From the bar charts as shown below we are able to observe and visualize the room prices in terms of groups for each neighborhood group. We can see that there is not very many listings that were in the high, very high or luxury group. Most of the listings were from either the low or medium cost group. An interesting thing we saw here is that Manhattan had higher prices for each Airbnb compared to Brooklyn or Queens. Brooklyn boasted the most low price listings in the area. It can be concluded that if we were interested to purchase a low cost rental property we can look to Brooklyn whereas if we want a medium cost property we could look at Manhattan.
+						</p>
+                        <img src="images/airbnb/8.png"></a>
+						<h4>Analysis of Listing Prices in New York </h4>
+						<p>The prices of the New York neighborhoods which consist of the groups we are focusing on which are Brooklyn, Queens and Manhattan presented us with a histogram that is skewed to the right. This graph shows us the average cost of renting an Airbnb in these neighborhoods. The histogram shows us that most of the popular listings in these areas were priced at 100$ and below. Therefore we can presume that the majority population that rents Airbnb rooms in New York often prioritize price over quality. Our investment group believes that we can look at properties with rentals ranging from 50-200$ per night to gain maximum exposure in the Airbnb market in New York City.
+						</p>
+                        <img src="images/airbnb/9.png"></a>
+						<h4>Analysis of rental yields for each neighborhood</h4>
+						<p>As we can see from the boxplot graph below we can see a lot of outliers exceeding the maximum line of the boxplot however we cannot discount the fact that there may be higher cost listings in these areas. Our boxplot is squeezed with a lot of outliers due to the fact that we took the average room price for each neighborhood which does not account for all the expensive properties in the areas. However upon closer inspection we noticed that Brooklyn had an average rental yield higher than any other neighborhood group. This shows that Brooklyn is a good area to invest in if we are interested in pursuing the Airbnb business. 
+						</p>
+                        <img src="images/airbnb/10.png"></a>
+						<h3>Conclusion</h3>
+						<p>In conclusion our findings have justified that Brooklyn is the best location for purchasing a property and renting it out for the highest returns. This is justified by the fact that the histogram above showed that people looking for Airbnb rooms in New York tend to go for cheaper options which make sense because they tend to be there for a work trip instead of vacation therefore just require a simple place to rest. With this in mind the bar chart above shows that most of the popular low cost listings come from Brooklyn so that solidifies our stance on investing in the area. Lastly, our decision was sealed when we noticed that Brooklyn had the highest average rental yield annually compared to other neighborhood groups in New York. In short we conclude that Brooklyn has the highest rental yield in New York and also consumers' decisions towards selecting an Airbnb in New York were heavily dictated by the price of the listing. 
+						</p>
+						<ul class="actions">
+							<li><a href="index.html" class="button">Home page</a></li>
+						</ul>
+					</section>
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Untitled</li><li>Thanks for stopping by</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.poptrox.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
